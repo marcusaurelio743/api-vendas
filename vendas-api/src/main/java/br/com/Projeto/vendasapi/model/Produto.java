@@ -19,7 +19,7 @@ public class Produto {
 	private String nome;
 	@Column(length = 255)
 	private String descricao;
-	@Column(precision = 2,scale = 16)
+	@Column(precision = 16,scale = 2)
 	private BigDecimal preco;
 	private String sku;
 	public Long getId() {
@@ -57,6 +57,19 @@ public class Produto {
 		return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", preco=" + preco + ", sku=" + sku
 				+ "]";
 	}
+	public Produto() {
+		super();
+		
+	}
+	public Produto(String nome, String descricao, BigDecimal preco, String sku) {
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.sku = sku;
+	}
+	
+	
 	
 	
 	
