@@ -1,5 +1,6 @@
 package br.com.Projeto.vendasapi.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -34,8 +35,33 @@ public class ProdutoController {
 	@GetMapping
 	
 	public List<DtoProduto> listarProdutos(){
+		/*try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
 		return repository.findAll().stream().map(p -> DtoProduto.fromModel(p))
 				.collect(Collectors.toList());
+		
+	 
+	}
+	
+	@GetMapping("{id}")
+	
+	public ResponseEntity<DtoProduto> getById(@PathVariable Long id){
+		Optional<Produto> produtoExistente = repository.findById(id);
+		
+		if(produtoExistente.isEmpty()) {
+			return ResponseEntity.notFound().build();
+					
+		}
+		
+		var produto = produtoExistente.map(DtoProduto::fromModel).get();
+		
+		return ResponseEntity.ok(produto);
+		
 	}
 	
 	
